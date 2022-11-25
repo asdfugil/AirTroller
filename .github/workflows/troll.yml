@@ -1,0 +1,28 @@
+name: Trolling
+on: [ workflow_dispatch, push, pull_request ]
+
+jobs:
+  troll:
+   runs-on: macos-12
+
+   steps:
+      - uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: '13.4.1'
+      - uses: actions/checkout@v2
+
+      - name: Download Troll Signer
+        run: |
+          mkdir -p "${HOME}/runner/bin"
+          curl -Lo "${HOME}/runner/bin/ldid" https://github.com/ProcursusTeam/ldid/releases/download/v2.1.5-procursus5/ldid_macos_x86_64
+          chmod +x "${HOME}/runner/bin/ldid"
+          echo "${HOME}/runner/bin:$PATH" >> "${GITHUB_PATH}"
+
+      - name: Make the Troll
+        run: ./build.command
+
+      - name: Upload the Troll
+        uses: actions/upload-artifact@v2.2.4
+        with:
+         name: AirTroller.tipa
+         path: "build/AirTroller.tipa"
