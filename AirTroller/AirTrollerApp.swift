@@ -14,7 +14,7 @@ struct AirTrollerApp: App {
             ContentView()
                 .onAppear {
                     // MARK: Check for new versions
-                    if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String, let url = URL(string: "https://api.github.com/repos/sourcelocation/AirTroller/releases/latest") {
+/*                    if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String, let url = URL(string: "https://api.github.com/repos/sourcelocation/AirTroller/releases/latest") {
                         let task = URLSession.shared.dataTask(with: url) {(data, response, error) in
                             guard let data = data else { return }
 
@@ -27,7 +27,7 @@ struct AirTrollerApp: App {
                             }
                         }
                         task.resume()
-                    }
+                    }*/
                     
                     // Clean up tmp dir
                     for url in (try? FileManager.default.contentsOfDirectory(at: FileManager.default.temporaryDirectory, includingPropertiesForKeys: nil)) ?? [] {
